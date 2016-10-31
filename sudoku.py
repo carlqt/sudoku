@@ -47,8 +47,6 @@ def search(values):
     if all(len(values[s]) == 1 for s in squares):
         return values
     n,s = min((len(values[s]), s) for s in squares if len(values[s]) > 1)
-    # pdb.set_trace()
-    # print "n: {0}, s: {1}".format(n, s)
     return some(search(assign(values.copy(), s, d)) for d in values[s])
 
 def some(seq):
@@ -78,10 +76,11 @@ def display(values):
 grid1  = '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
 grid2  = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
 hard1  = '.....6....59.....82....8....45........3........6..3.54...325..6..................'
+hard2  = '...............................2.................................................'
 
 # display(parse_grid(grid1))
-# display(search(solve(grid2)))
-display(solve(hard1))
+display(search(solve(grid2)))
+# display(solve(hard1))
 # print(len(solve(grid2)))
 # grid_values puts the input grid to its respective keys
 # print grid_values(grid1)

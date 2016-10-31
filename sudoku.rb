@@ -1,5 +1,7 @@
 require 'set'
 require 'pry'
+require_relative './sudoku/base_grid'
+require_relative './sudoku/solutions_grid'
 require_relative './sudoku/grid'
 require_relative './sudoku/constraint_propagation'
 
@@ -24,7 +26,14 @@ grid1  = '0030206009003050010018064000081029007000000080067082000026095008002030
 hard1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
 
 sgrid = Sudoku::Grid.new(hard1)
-s = Sudoku::ConstraintPropagation.new(sgrid)
-s.execute!
+# s = Sudoku::ConstraintPropagation.new(sgrid)
+# s.execute!
+sol_grid = sgrid.solutions_grid
+sgrid.parsed_grid.each do |square, value|
+  if Sudoku::Grid.digits_string.include?(value) && sol_grid.assign_and_propagate!(square, value)
+    next
+  end
+end
+sol_grid.search(sol_grid.grid)
 binding.pry
 'he'

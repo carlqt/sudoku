@@ -9,7 +9,6 @@ def all(seq)
 end
 
 def some(seq)
-  binding.pry
   for e in seq do return e if e end
   return false
 end
@@ -105,7 +104,6 @@ def display(values)
 end
 
 def search(values)
-  binding.pry if !values
   return false if not values
   return values if all($squares.map{ |s| (values[s].size == 1) })
   unsolved_squares = $squares.select{ |s| values[s].size > 1 }
