@@ -28,14 +28,23 @@ module Sudoku
 
     def search(grid_values)
       # return false if !grid_values
-      return grid_values if solved?(grid_values)
+      # return grid_values if solved?(grid_values)
+      #
+      # key, value = unsolved_squares(grid_values).first
+      #
+      # # binding.pry if value == 36.to_s
+      # new_values = grid_values.dup
+      # value.chars.each do |val|
+      #   return search(assign_and_propagate(new_values, key, val))
+      # end
+      if solved?(grid_values)
+        @grid = grid_values
+        return grid_values
+      end
 
       key, value = unsolved_squares(grid_values).first
 
-      value.chars.each do |val|
-        some(search(assign_and_propagate(grid_values.dup, key, val)))
-      end
-      # return some(search(assign(grid.copy(), key, value)) for d in values[s])
+      return search(assign_and_propagate(grid_values.dup, key, value[0]))
     end
 
     def some(seq)
@@ -46,7 +55,6 @@ module Sudoku
     def assign_and_propagate(grid, key, value)
       assign(grid, key, value)
       eliminate(grid, key, value)
-      grid
     end
 
     def assign(grid, key, value)
