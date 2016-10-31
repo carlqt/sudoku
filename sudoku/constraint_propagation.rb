@@ -6,7 +6,7 @@ module Sudoku
 
     def execute!
       @grid.parsed_grid.each do |square, value|
-        if Sudoku::Grid.digits_string.include?(value) && !assign!(square, value)
+        if Sudoku::Grid.digits_string.include?(value) && !assign!(@grid.solutions_grid, square, value)
           next
         end
       end
@@ -14,20 +14,20 @@ module Sudoku
       @grid.solutions_grid
     end
 
-    def assign!(key, value)
-      @grid.solutions_grid[key] = value
-      eliminate!(key, value)
+    def assign!(grid, key, value)
+      grid[key] = value
+      eliminate!(grid, key, value)
 
-      @grid.solutions_grid
+      grid
     end
 
-    def eliminate!(key, value)
+    def eliminate!(grid, key, value)
       @grid.peers[key].each do |square|
-        if @grid.solutions_grid[square].size > 1
-          @grid.solutions_grid[square].gsub!(value, '')
+        if grid[square].size > 1
+          grid[square].gsub!(value, '')
 
-          if @grid.solutions_grid[square].size == 1
-            assign!(square, @grid.solutions_grid[square])
+          if grid[square].size == 1
+            assign!(grid, square, grid[square])
           end
         end
       end
