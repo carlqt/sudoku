@@ -35,5 +35,6 @@ sgrid.parsed_grid.each do |square, value|
   end
 end
 sol_grid.search(sol_grid.grid)
-binding.pry
+sol_grid.display
+# binding.pry
 'he'

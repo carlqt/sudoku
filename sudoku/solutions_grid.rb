@@ -33,7 +33,7 @@ module Sudoku
       key, value = unsolved_squares(grid_values).first
 
       value.chars.each do |val|
-        some(search(assign_and_propagate(grid_values, key, val)))
+        some(search(assign_and_propagate(grid_values.dup, key, val)))
       end
       # return some(search(assign(grid.copy(), key, value)) for d in values[s])
     end
@@ -75,6 +75,23 @@ module Sudoku
       end
 
       solutions_grid
+    end
+
+    def display
+      max_size = squares.map{ |s| grid[s].size }.max + 1
+      line = (["-" * max_size * 3] * 3).join("+")
+
+      for r in ROWS do
+        for c in DIGITS do
+          values_str = grid["#{r}#{c}"]
+          print values_str + (" " * (max_size - values_str.size))
+          print "|" if c == 3 or c == 6
+        end
+
+        puts ""
+        puts line if r == "C" or r == "F"
+      end
+
     end
 
     def unsolved_squares(grid = nil)

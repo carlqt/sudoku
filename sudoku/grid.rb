@@ -19,6 +19,7 @@ module Sudoku
       @solutions_grid.all?{ |k,v| @solutions_grid[k].size == 1 }
     end
 
+
     private
 
     def parse_grid
