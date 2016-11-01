@@ -8,6 +8,7 @@ describe Sudoku::SolutionsGrid do
     subject(:grid){ Sudoku::SolutionsGrid.new(parsed_grid) }
     it 'initializes the squares (#grid) based on input. It applies constraint propagation immediately' do
       expect(grid.grid["A3"]).to eq 3.to_s
+      expect(grid.grid["A5"]).to eq 2.to_s
     end
   end
 
