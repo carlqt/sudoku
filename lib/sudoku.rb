@@ -5,18 +5,7 @@ require_relative './sudoku/base_grid'
 require_relative './sudoku/input_parser'
 require_relative './sudoku/solutions_grid'
 require_relative './sudoku/grid'
-
-class SudokuSolver
-  def initialize(grid)
-    @sudoku_grid = Sudoku::Grid.new(grid)
-  end
-
-  def solve
-    solutions_grid = @sudoku_grid.solutions_grid
-    solutions_grid.search(solutions_grid.grid)
-    solutions_grid.display
-  end
-end
+require_relative './sudoku/sudoku_solver'
 
 ARGV << '-h' if ARGV.empty?
 
