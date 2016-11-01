@@ -1,7 +1,7 @@
 module Sudoku
   class SolutionsGrid < BaseGrid
     def initialize(grid = nil)
-      @grid = grid || init_solutions_grid
+      @grid = init_solutions_grid(grid)
     end
 
     def assign_and_propagate!(key, value)
@@ -27,16 +27,6 @@ module Sudoku
     end
 
     def search(grid_values)
-      # return false if !grid_values
-      # return grid_values if solved?(grid_values)
-      #
-      # key, value = unsolved_squares(grid_values).first
-      #
-      # # binding.pry if value == 36.to_s
-      # new_values = grid_values.dup
-      # value.chars.each do |val|
-      #   return search(assign_and_propagate(new_values, key, val))
-      # end
       if solved?(grid_values)
         @grid = grid_values
         return grid_values
@@ -45,11 +35,6 @@ module Sudoku
       key, value = unsolved_squares(grid_values).first
 
       return search(assign_and_propagate(grid_values.dup, key, value[0]))
-    end
-
-    def some(seq)
-      for e in seq do return e if e end
-      return false
     end
 
     def assign_and_propagate(grid, key, value)
@@ -75,14 +60,8 @@ module Sudoku
       grid
     end
 
-    def init_solutions_grid
-      solutions_grid = {}
-
-      squares.each do |square|
-        solutions_grid[square] = '123456789'
-      end
-
-      solutions_grid
+    def init_solutions_grid(input_grid)
+      assign_possible_values(input_grid)
     end
 
     def display
@@ -123,6 +102,20 @@ module Sudoku
     end
 
     def grid
+      @grid
+    end
+
+    private
+
+    def assign_possible_values(grid_input)
+      @grid = {}
+      squares.each do |k,v|
+        @grid[k] = '123456789'
+      end
+
+      grid_input.each do |square, value|
+        '123456789'.include?(value) && assign_and_propagate!(square, value)
+      end
       @grid
     end
   end

@@ -4,7 +4,7 @@ GEM
     coderay (1.1.1)
     diff-lcs (1.2.5)
     method_source (0.8.2)
-    pry (0.10.3)
+    pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
@@ -27,7 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  pry
+  pry (= 0.10.1)
   rspec
 
 RUBY VERSION

@@ -8,6 +8,8 @@ module Sudoku
       if File.file?(parsed_file)
         parsed_file = File.read(input).delete("\s\n")
       end
+
+      return parsed_file
     end
   end
 end

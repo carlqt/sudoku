@@ -8,7 +8,11 @@ module Sudoku
     end
 
     def solutions_grid
-      @solutions_grid ||= SolutionsGrid.new
+      @solutions_grid ||= SolutionsGrid.new(@parsed_grid)
+    end
+
+    def new_solutions_grid
+      @solutions_grid = SolutionsGrid.new(@parsed_grid)
     end
 
     def self.digits_string
@@ -18,7 +22,6 @@ module Sudoku
     def solved?
       @solutions_grid.all?{ |k,v| @solutions_grid[k].size == 1 }
     end
-
 
     private
 
