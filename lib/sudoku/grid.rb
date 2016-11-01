@@ -3,7 +3,7 @@ module Sudoku
     attr_accessor :parsed_grid, :solutions_grid
 
     def initialize(input_grid)
-      @grid = input_grid
+      @grid = InputParser.parse!(input_grid)
       @parsed_grid = parse_grid
     end
 

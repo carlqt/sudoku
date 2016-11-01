@@ -1,5 +1,6 @@
 require 'set'
 require_relative './sudoku/base_grid'
+require_relative './sudoku/input_parser'
 require_relative './sudoku/solutions_grid'
 require_relative './sudoku/grid'
 require_relative './sudoku/constraint_propagation'
@@ -27,5 +28,6 @@ grid1  = '0030206009003050010018064000081029007000000080067082000026095008002030
 hard1 = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......'
 hard2  = '.................................................................................'
 
-sudoku = SudokuSolver.new(grid1)
+file = ARGV[0]
+sudoku = SudokuSolver.new(file)
 sudoku.solve
