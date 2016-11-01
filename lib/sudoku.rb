@@ -29,10 +29,14 @@ OptionParser.new do |opts|
   opts.on("-fFILE", "--file FILE", "The filename of the input. e.g. input.sudoku ") do |f|
     options[:file] = f
   end
+
+  opts.on("-cINPUT", "--cin INPUT", "Input text") do |c|
+    options[:c_in] = c
+  end
 end.parse!
 
 
-if !options[:file].nil?
-  sudoku = SudokuSolver.new(options[:file])
+if options[:file] || options[:c_in]
+  sudoku = SudokuSolver.new(options[:file] || options[:c_in])
   sudoku.solve
 end
